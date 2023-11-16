@@ -1,135 +1,130 @@
-[![Build Status](https://app.travis-ci.com/kaltura/playkit-js-plugin-example.svg?branch=master)](https://app.travis-ci.com/kaltura/playkit-js-plugin-example)
-[![](https://img.shields.io/npm/v/@playkit-js/plugin-example/latest.svg)](https://www.npmjs.com/package/@playkit-js/plugin-example)
-[![](https://img.shields.io/npm/v/@playkit-js/plugin-example/canary.svg)](https://www.npmjs.com/package/@playkit-js/plugin-example/v/canary)
+# PlayKit JS Custom Buttons - Custom Buttons plugin for the [PlayKit JS Player]
 
-# playkit-js-plugin-example
+<!--[![Build Status](https://github.com/kaltura/playkit-js-downloads/actions/workflows/run_canary.yaml/badge.svg)](https://github.com/kaltura/playkit-js-downloads/actions/workflows/run_canary.yaml)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![](https://img.shields.io/npm/v/@playkit-js/playkit-js-downloads/latest.svg)](https://www.npmjs.com/package/@playkit-js/playkit-js-downloads)
+[![](https://img.shields.io/npm/v/@playkit-js/playkit-js-downloads/canary.svg)](https://www.npmjs.com/package/@playkit-js/playkit-js-downloads/v/canary) -->
 
-playkit-js-plugin-example is a [kaltura player] plugin that groups several UI services,
-in order to simplify and facilitate the customization of the [kaltura player] UI by providing a simple and clean API.
+This plugin enables custom buttons to be added on top of the Kaltura Player.
 
-Each service manages a different area of UI functionality.
+PlayKit JS Custom Buttons is written in [ECMAScript6], statically analysed using [Typescript] and transpiled in ECMAScript5 using [Babel].
 
-It relies on [kaltura player] core API for managing UI features.
-
-playkit-js-plugin-example is written in [ECMAScript6] (`*.js`) and [TypeScript] (`*.ts`) (strongly typed superset of ES6), 
-and transpiled in ECMAScript5 using [Babel](https://babeljs.io/) and the [TypeScript compiler].
-
-[Webpack] is used to build the distro bundle and serve the local development environment.
-
-[kaltura player]: https://github.com/kaltura/kaltura-player-js.
-[ecmascript6]: https://github.com/ericdouglas/ES6-Learning#articles--tutorials
 [typescript]: https://www.typescriptlang.org/
-[typescript compiler]: https://www.typescriptlang.org/docs/handbook/compiler-options.html
-[webpack]: https://webpack.js.org/
+[ecmascript6]: https://github.com/ericdouglas/ES6-Learning#articles--tutorials
+[babel]: https://babeljs.io
 
-## Features
+## Getting Started
 
-  Write here your plugin description...
-    
-## Getting started with development
+### Prerequisites
 
-```sh
-# First, checkout the repository and install the required dependencies
-git clone https://github.com/kaltura/playkit-js-plugin-example.git
+The plugin requires [Kaltura Player] and [playkit-ui-managers] to be loaded first.
 
-# Navigate to the repo dir
-cd playkit-js-plugin-example
+[kaltura player]: https://github.com/kaltura/kaltura-player-js
+[playkit-ui-managers]: https://github.com/kaltura/playkit-js-ui-managers
 
-# Run dev-server for demo page (recompiles on file-watch, and write to actual dist fs artifacts)
-npm run dev
+### Installing
 
-# Before submitting a PR - Run the pre commit command
-npm run pre:commit
+First, clone and run [yarn] to install dependencies:
 
-# this command will run:
-
-# 1. types check
-# 2. lint check
-# 3. generate/update types
-# 4. generate/update docs
-```
-
-The dev server will host files on port 8000. Once started, the demo can be found running at http://localhost:8000/.
-
-Before submitting a PR, please see our [contribution guidelines](CONTRIBUTING.md).
-
-
-### Linter (ESlint)
-
-Run linter:
+[yarn]: https://yarnpkg.com/lang/en/
 
 ```
-npm run lint:check
+git clone https://github.com/Prajwal264/playkit-js-custom-buttons.git
+cd playkit-js-custom-buttons
+yarn install
 ```
 
-Run linter with auto-fix mode:
+### Building
 
-```
-npm run lint:fix
-```
+Then, build the plugin
 
-### Formatting Code
-
-Run prettier to format code
-
-```
-npm run prettier:fix
+```javascript
+yarn run build
 ```
 
-### Type Check
+### Embed the library in your test page
 
-Run type-check to verify TypeScript types
+Finally, add the bundle as a script tag in your page, and initialize the player
+
+```html
+<!--Kaltura player-->
+<script type="text/javascript" src="/PATH/TO/FILE/kaltura-player.js"></script>
+<!--Playkit ui managers plugin -->
+<script type="text/javascript" src="/PATH/TO/FILE/playkit-ui-manager.js"></script>
+<!--PlayKit download plugin-->
+<script type="text/javascript" src="/PATH/TO/FILE/playkit-custom-buttons-plugin.js"></script>
+<div id="player-placeholder" style="height:360px; width:640px">
+  <script type="text/javascript">
+    var playerContainer = document.querySelector("#player-placeholder");
+    var config = {
+     ...
+     targetId: 'player-placeholder',
+     plugins: {
+       customButtons: {
+         items: [{
+            label: 'button',
+            area: 'BottomBarRightControls',
+            presets: ['Playback'],
+            onClick: () => { console.log('clicked') },
+            className: 'button',
+            content: 'Click Me!',
+            beforeComponent: 'Volume',
+         }]  
+       }
+     },
+     ...
+    };
+    var player = KalturaPlayer.setup(config);
+    player.loadMedia(...);
+  </script>
+</div>
+```
+
+#### Configuation Example
+
+* You may enable the download plugin just by adding it without any specific plugin config to the plugins config section or also add your own preferred config
 
 ```
-npm run types:check
+plugins: {
+  customButtons: {
+     items: [{
+        label: 'button',
+        area: 'BottomBarRightControls',
+        presets: ['Playback'],
+        onClick: () => { console.log('clicked') },
+        className: 'button',
+        content: 'Click Me!',
+        beforeComponent: 'Volume',
+     }]  
+   }
+}
 ```
 
-### Automated tests (Mocha/Karma)
-
-Run all tests at once:
-
 ```
-npm test
+plugins: {
+  customButtons: {
+     items: [{
+        label: 'button',   // name of the button to be inserted
+        area: 'BottomBarRightControls',  // area of insertion
+        presets: ['Playback'], // presets
+        onClick: () => { console.log('clicked') }, // onClick handler
+        className: 'button',  // class name for the button
+        content: 'Click Me!',  // content to be inserted 
+        beforeComponent: 'Volume',  // position of insertion
+        afterComponent: undefined,  // position of insertion
+     }]  
+  }
+}
 ```
 
-Run unit tests in watch mode:
+### And coding style tests
 
-```
-npm run test:watch
-```
+We use ESLint [recommended set](http://eslint.org/docs/rules/) with some additions for enforcing [Flow] types and other rules.
 
-## Design
+See [ESLint config](.eslintrc.json) for full configuration.
 
-An overview of this project's design, can be found [here](https://kaltura.atlassian.net/wiki/spaces/PROD/pages/3554412657/Side+Panel+Manager+-+Design+Document).
-
-## API docs
-
-[API docs](https://kaltura.github.io/playkit-js-plugin-example/docs/api/index.html)
-
-## Usage guide
-
-[usage guide](./docs/guide.md)
-
-## Demo
-
-[https://kaltura.github.io/playkit-js-plugin-example/demo/index.html](https://kaltura.github.io/playkit-js-plugin-example/demo/index.html)
-
+We also use [.editorconfig](.editorconfig) to maintain consistent coding styles and settings, please make sure you comply with the styling.
 
 ## Compatibility
 
-playkit-js-plugin-example is only compatible with browsers supporting MediaSource extensions (MSE) API with 'video/MP4' mime-type inputs.
-
-playkit-js-plugin-example is supported on:
-
-- Chrome 39+ for Android
-- Chrome 39+ for Desktop
-- Firefox 41+ for Android
-- Firefox 42+ for Desktop
-- IE11 for Windows 8.1+
-- Edge for Windows 10+
-- Safari 8+ for MacOS 10.10+
-- Safari for ipadOS 13+
-
-## License
-
-playkit-js-plugin-example is released under [Apache 2.0 License](LICENSE)
+TBD
