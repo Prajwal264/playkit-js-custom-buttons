@@ -1,4 +1,4 @@
 import { registerPlugin } from '@playkit-js/kaltura-player-js';
-import { pluginName, PluginExample } from './plugin-example';
+import { pluginName, CustomButtonsPlugin } from './custom-buttons';
 
-registerPlugin(pluginName, PluginExample);
+registerPlugin(pluginName, CustomButtonsPlugin);

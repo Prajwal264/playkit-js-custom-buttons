@@ -44,7 +44,7 @@ module.exports = (env, { mode }) => {
       extensions: ['.tsx', '.ts', '.js']
     },
     output: {
-      filename: 'playkit-plugin-example.js',
+      filename: 'playkit-custom-button-plugin.js',
       path: path.resolve(__dirname, 'dist'),
       clean: true
     },
