@@ -6,17 +6,25 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended"
   ],
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
   "rules": {
     "react/prefer-stateless-function": "off",
-    "max-len": ["warn", { "code": 130 }],
+    "max-len": [
+      "warn",
+      {
+        "code": 130
+      }
+    ],
     "eol-last": "off",
     "prettier/prettier": "error",
     "@typescript-eslint/explicit-function-return-type": "warn",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/explicit-member-accessibility":[
+    "@typescript-eslint/explicit-member-accessibility": [
       "error",
       {
         "accessibility": "explicit",
@@ -37,7 +45,13 @@
     "prefer-const": "error",
     "prefer-arrow-callback": "error",
     "no-trailing-spaces": "error",
-    "quotes": ["warn", "single", {"avoidEscape": true}],
+    "quotes": [
+      "warn",
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
     "no-restricted-properties": [
       "error",
       {
@@ -52,9 +66,11 @@
   },
   "overrides": [
     {
-      "files": ["**/ui/**/*"],
+      "files": [
+        "**/ui/**/*"
+      ],
       "rules": {
-        "@typescript-eslint/explicit-member-accessibility":[
+        "@typescript-eslint/explicit-member-accessibility": [
           "error",
           {
             "accessibility": "explicit",
@@ -67,6 +83,14 @@
             }
           }
         ]
+      }
+    },
+    {
+      "files": [
+        "*.spec.js"
+      ],
+      "rules": {
+        "no-unused-expressions": 0
       }
     }
   ],
