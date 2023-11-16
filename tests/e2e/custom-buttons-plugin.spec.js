@@ -1,10 +1,9 @@
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 import '../../src/index';
 import { setup } from '@playkit-js/kaltura-player-js';
 import { config, targetId } from '../mock/config';
 import { mediaData } from '../mock/media-sourc';
 /* eslint-disable jest/valid-expect */
-
 
 const onClick = () => {
   console.log('Clicked');
