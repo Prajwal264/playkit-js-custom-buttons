@@ -14,12 +14,6 @@ type CustonButtonProps = {
 
 @withEventManager
 export class CustomButtonComponent extends Component<CustonButtonProps> {
-  componentDidMount() {
-    if (this.props.eventManager) {
-      this.props.eventManager.addEventListener(this.props.player, '', () => { });
-    }
-  }
-
   render(): ComponentChild {
     return (
       <button onClick={this.props.onClick} className={this.props.className}>
