@@ -27,6 +27,7 @@ export class CustomButtonsPlugin extends BasePlugin<CustomButtonsPluginConfig> {
         get: CustomButtonComponent,
         beforeComponent: item.beforeComponent,
         afterComponent: item.afterComponent,
+        replaceComponent: item.replaceComponent,
         props: {
           className: item.className,
           content: item.content,

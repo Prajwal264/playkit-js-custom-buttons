@@ -7,6 +7,7 @@ export type ICustomButtonPluginItem = {
   content: string;
   beforeComponent: string;
   afterComponent: string;
+  replaceComponent: string;
 };
 
 export type CustomButtonsPluginConfig = {
